@@ -138,7 +138,7 @@ CACHES = {
         'LOCATION': 'my_cache_table',
         'TIMEOUT': 60,
         'OPTIONS': {
-            # 'MAX_ENTRIES': 1000
+            'MAX_ENTRIES': 1000
         }
     }
 }

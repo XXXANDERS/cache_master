@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from store.api.serializers import AuthorsSerializer, BooksSerializer
@@ -12,16 +13,16 @@ class AuthorsViewSet(ModelViewSet):
     queryset = Author.objects.prefetch_related('books').all()
     serializer_class = AuthorsSerializer
 
-    @method_decorator(cache_page(60 * 60 * 2))
-    @method_decorator(vary_on_cookie)
-    def list(self, request, *args, **kwargs):
-        super().list(request, *args, **kwargs)
-
 
 class BooksViewSet(ModelViewSet):
     # queryset = Book.objects.select_related('author').all()
     queryset = Book.objects.all()
     serializer_class = BooksSerializer
+
+    # @method_decorator(vary_on_cookie) # для каждого пользователя отдельное кэширование
+    @method_decorator(cache_page(20 * 1))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
 
 @cache_page(60 * 2)
