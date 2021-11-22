@@ -11,6 +11,14 @@ class FirstMiddleware:
         print('We are in FirstMiddleware, after')
         return response
 
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print('PROCESS VIEW!!!')
+        print(request)
+        print(view_func)
+        print(view_args)
+        print(view_kwargs)
+        pass
+
     def process_exception(self, request, exception):
         # здесь мы можем сделать логирование или ещё что
         print(f'Exception is {exception}')

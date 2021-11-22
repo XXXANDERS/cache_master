@@ -23,7 +23,7 @@ class BooksViewSet(ModelViewSet):
     # @method_decorator(vary_on_cookie) # для каждого пользователя отдельное кэширование
     @method_decorator(cache_page(20 * 1))
     def list(self, request, *args, **kwargs):
-        a = 1 / 0
+        # a = 1 / 0
         return super().list(request, *args, **kwargs)
 
 
