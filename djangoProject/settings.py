@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'store.apps.StoreConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,9 @@ MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'django.middleware.common.CommonMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
+
+    'core.middleware.FirstMiddleware',
+    # 'core.middleware.SecondMiddleware',
 ]
 
 ROOT_URLCONF = 'djangoProject.urls'
@@ -136,6 +140,10 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'my_cache_table',
+
+        # 'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        # 'LOCATION': '/var/tmp/django_cache',
+
         'TIMEOUT': 60,
         'OPTIONS': {
             'MAX_ENTRIES': 1000
